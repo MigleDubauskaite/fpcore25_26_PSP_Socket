@@ -66,8 +66,9 @@ public class ServerSocketTextsNoCiclico {
 //		****** true → envía el texto inmediatamente
 //		PrintWriter es una clase que:
 		/*
-		 * Escribe TEXTO Convierte automáticamente texto → bytes Envía esos bytes por el
-		 * OutputStream
+		 * Escribe TEXTO 
+		 * Convierte automáticamente texto → bytes 
+		 * Envía esos bytes por el OutputStream
 		 */
 
 		isr = new InputStreamReader(is);
