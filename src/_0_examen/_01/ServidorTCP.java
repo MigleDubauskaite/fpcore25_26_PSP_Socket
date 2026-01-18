@@ -37,7 +37,7 @@ public class ServidorTCP {
 				socket = servidor.serverSocket.accept();
 				System.out.printf("(Servidor: %d)Cliente se ha conectado%n", servidor.port);
 				socketAceptados++;
-				new Thread(new GestorSocketServer(socket));
+				new Thread(new GestorSocketServer(socket)).start();;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
