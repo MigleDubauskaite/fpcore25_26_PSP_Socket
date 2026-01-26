@@ -1,4 +1,4 @@
-package _0_examen._01;
+package _0_examen._01_procesador_mensajes;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
