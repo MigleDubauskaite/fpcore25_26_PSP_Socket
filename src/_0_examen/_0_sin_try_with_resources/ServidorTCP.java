@@ -1,4 +1,4 @@
-package _0_examen._00;
+package _0_examen._0_sin_try_with_resources;
 
 import java.io.IOException;
 import java.net.ServerSocket;

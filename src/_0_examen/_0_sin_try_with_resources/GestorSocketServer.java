@@ -1,4 +1,4 @@
-package _0_examen._00;
+package _0_examen._0_sin_try_with_resources;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.atomic.AtomicLong;
 
-import _0_examen._000Correcto.JuegoAdivinaNumero;
+import _0_examen._0_con_try_with_resources.JuegoAdivinaNumero;
 
 /**
  * GestorSocketServer es una clase que implementa la interfaz Runnable para

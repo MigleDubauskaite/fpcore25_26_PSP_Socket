@@ -1,4 +1,4 @@
-package _0_examen._000Correcto;
+package _0_examen._0_con_try_with_resources;
 
 import java.io.IOException;
 import java.net.ServerSocket;

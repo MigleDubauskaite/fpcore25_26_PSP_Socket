@@ -1,4 +1,4 @@
-package _0_examen._00;
+package _0_examen._0_sin_try_with_resources;
 
 import java.io.BufferedReader;
 import java.io.IOException;
