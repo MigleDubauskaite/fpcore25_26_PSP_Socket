@@ -11,7 +11,7 @@ public class JuegoAdivinaNumero {
 		this.numeroCorrecto = random.nextInt(1, 101);
 	}
 
-	// CUANDO EL SERVIDOR RECIBE UN NÚMERO DEL CLIENTE, VERIFICA ESTE NÚMERO
+	// CUANDO EL SERVIDOR RECIBE UN NÚMERO DEL CLIENTE, VERIFICA ESTE NÚMERO 
 	public String verificar(String intento) {
 		try {
 			int numeroIntento = Integer.parseInt(intento);

@@ -2,9 +2,7 @@ package _0_examen._01_procesador_mensajes_practica0_otro;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.atomic.AtomicLong;
@@ -23,10 +21,8 @@ public class GestorSocketServer implements Runnable {
 	@Override
 	public void run() {
 
-		try (InputStream is = socket.getInputStream();
-				OutputStream os = socket.getOutputStream();
-				PrintWriter pw = new PrintWriter(os, true);
-				BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	             PrintWriter pw = new PrintWriter(socket.getOutputStream(), true)) {
 
 			String intentoLeido;
 
