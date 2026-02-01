@@ -1,4 +1,4 @@
-package _0_examen._01_procesador_mensajes_practica0_otro;
+package _0_examen._01_procesador_mensajes.practica0_otro;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

@@ -1,4 +1,4 @@
-package _0_examen._01_procesador_mensajes_practica1_otro;
+package _0_examen._01_procesador_mensajes.practica1_otro;
 
 import java.io.BufferedReader;
 import java.io.IOException;

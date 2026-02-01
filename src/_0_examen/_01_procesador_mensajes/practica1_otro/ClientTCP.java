@@ -1,4 +1,4 @@
-package _0_examen._01_procesador_mensajes_practica0_otro;
+package _0_examen._01_procesador_mensajes.practica1_otro;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,11 +11,11 @@ public class ClientTCP {
 
 	private String IP;
 	private int port;
-	private static AtomicLong intentos = new AtomicLong(0);
 	private static RandomGenerator random = RandomGenerator.getDefault();
+	private static AtomicLong intentos = new AtomicLong(0);
 
-	public ClientTCP(String IP, int port) {
-		this.IP = IP;
+	public ClientTCP(String iP, int port) {
+		IP = iP;
 		this.port = port;
 	}
 
@@ -27,34 +27,35 @@ public class ClientTCP {
 
 			for (int i = 0; i < 100; i++) {
 
-				String mensajes[] = { "#Saludo#", "#Eco#Hola mundo#", "Hola", "#Fin#" };
-				int mensajeIndex = random.nextInt(mensajes.length);
-				String mensaje = mensajes[mensajeIndex];
+				String mensajes[] = { "#SUMA#3#5#", "#RESTA#8#3#", "#MULT#1#2#", "#DIV#10#5#", "#FIN#", "Hola" };
+				int index = random.nextInt(mensajes.length);
+				String mensaje = mensajes[index];
 
 				pw.println(mensaje);
 				intentos.getAndIncrement();
-				System.out.println("(C) → Enviado: " + mensaje);
+				System.out.printf("(C) Mensaje enviado: %s %n", mensaje);
 
 				String respuesta = br.readLine();
-				System.out.println("(C) Servidor respondió: " + respuesta);
+				System.out.printf("(C) Mensaje recibido: %s %n", respuesta);
 
-				if (respuesta.equals("#Finalizado#")) {
-					System.out.printf("(C) -> Dato acertado después de %d intentos %n", intentos.get());
+				if (respuesta.equals("#ADIOS#")) {
+					System.out.printf("(C) Dato aceptado después de %d intentos%n", intentos.get());
 					break;
 				}
+
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			return;
 		}
 	}
 
 	public static void main(String[] args) {
-
-		for (int i = 0; i < 3; i++) {
-			ClientTCP cliente = new ClientTCP("localhost", 8080);
+		for (int i = 0; i < 5; i++) {
+			ClientTCP cliente = new ClientTCP("localhost", 9090);
 			cliente.iniciarCliente();
 		}
-
 	}
 
 }
