@@ -20,7 +20,7 @@ public class ProtocoloComunicacion {
 		if (!mensaje.startsWith("#") || !mensaje.endsWith("#"))
 			return ERR;
 
-		String contenido = mensaje.substring(1, mensaje.length() - 1).toUpperCase();
+		String contenido = mensaje.substring(1, mensaje.length() - 1);
 		String partes[] = contenido.split("#");
 
 		String comando = partes[0];
@@ -28,16 +28,24 @@ public class ProtocoloComunicacion {
 		if (CMD_FIN.equals(comando))
 			return MEN_FIN;
 
-		if (partes.length == 3) {
-			switch (comando) {
-			case CMD_RANDOM:
-				return generar3NumAleatorios(partes[1], partes[2]);
-			default:
-				return ERR;
-			}
+		switch (comando) {
+		case CMD_RANDOM:
+			if(partes.length == 3) return generar3NumAleatorios(partes[1], partes[2]);
+			else return ERR;
+		case CMD_SUMA:
+			if(partes.length == 2) return sumar(partes[1]);
+			return ERR;
+		case CMD_VOCALES:
+			if(partes.length == 2) return calcularVocales(partes[1]);
+			return ERR;
+		case CMD_MAYUS:
+			if(partes.length == 2) return convertirMayus(partes[1]);
+			return ERR;
+		default:
+			return ERR;
+
 		}
 
-		return ERR;
 	}
 
 	private static String generar3NumAleatorios(String numIn, String numFin) {
@@ -57,6 +65,37 @@ public class ProtocoloComunicacion {
 		} catch (NumberFormatException e) {
 			return ERR;
 		}
-
 	}
+
+	private static String sumar(String numerosStr) {
+
+		try {
+			String[] numeros = numerosStr.split(",");
+			int suma = 0;
+
+			for (String n : numeros) {
+				suma += Integer.parseInt(n.trim());
+			}
+			return String.valueOf(suma);
+		} catch (Exception e) {
+			return ERR;
+		}
+	}
+	
+	private static String calcularVocales(String texto) {
+		texto = texto.toLowerCase();
+		int contador = 0;
+		 for (char c : texto.toCharArray()) {
+		        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+		            contador++;
+		        }
+		    }
+		return String.valueOf(contador);
+	}
+	
+	private static String convertirMayus(String texto) {
+		if(texto == null) return ERR;
+		return texto.toUpperCase();
+	}
+
 }

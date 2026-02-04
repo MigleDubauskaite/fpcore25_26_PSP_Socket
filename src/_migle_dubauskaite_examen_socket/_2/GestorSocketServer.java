@@ -1,6 +1,7 @@
 package _migle_dubauskaite_examen_socket._2;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -26,21 +27,20 @@ public class GestorSocketServer implements Runnable {
 			String mensaje;
 
 			while ((mensaje = br.readLine()) != null) {
-				peticionesRecibidas.incrementAndGet();
-				System.out.printf("Gestor Server -> Mensaje recibido: %s%n", mensaje);
+				long numPeticion = peticionesRecibidas.incrementAndGet();
+				  System.out.printf("Gestor -> Petición %d recibida: %s%n", numPeticion, mensaje);
 
-				// verificar, pw
 				String respuesta = protocolo.procesar(mensaje);
 				System.out.printf("Gestor Server -> Respuesta enviada: %s%n", respuesta);
 				pw.println(respuesta);
 
-				if ("#FIN#".equals(mensaje)) break;
+				if ("#ConexionCerrada#".equals(respuesta)) break;
 
 			}
 
 			System.out.printf("Gestor Server -> Conexión cerrada.%n");
 
-		} catch (Exception e) {
+		} catch (IOException  e) {
 			System.out.printf("Gestor Server -> Error %s.%n", e.getMessage());
 			return;
 		}
