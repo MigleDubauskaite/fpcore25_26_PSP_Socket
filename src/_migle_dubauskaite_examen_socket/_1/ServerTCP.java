@@ -7,35 +7,32 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ServerTCP {
 	
 	private int port;
-	private static AtomicLong peticionesRecibidas = new AtomicLong(0);
-	
+	private static AtomicLong clientesAceptados = new AtomicLong(0);
 	public ServerTCP(int port) {
 		this.port = port;
 	}
-
-	public static AtomicLong getPeticionesRecibidas() {
-		return peticionesRecibidas;
+	public static AtomicLong getClientesAceptados() {
+		return clientesAceptados;
 	}
 	
 	public void ejecutar() {
 		try (ServerSocket serverSocket = new ServerSocket(port)) {
-			 System.out.printf("--- SERVIDOR INICIADO (Puerto: %d) ---%n", port);
-			
+			System.out.printf("S -> Estableciendo conexión en el puerto %d%n", port);
 			while(true) {
 				Socket socket = serverSocket.accept();
-				peticionesRecibidas.incrementAndGet();
-				System.out.printf("--- CLIENTE CONECTADO (Puerto: %d) ---%n", port);
-				//hilo
+				clientesAceptados.incrementAndGet();
+				System.out.printf("S -> Cliente conectado en el puerto %d%n", port);
+				new Thread(new GestorSocketServer(socket)).start();
 			}
-			
 		} catch (Exception e) {
-			System.out.printf("--- ERROR EN EL SERVER (Puerto: %d): %s ---%n", port, e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
 	public static void main(String[] args) {
-		ServerTCP server = new ServerTCP(8090);
+		ServerTCP server = new ServerTCP(8070);
 		server.ejecutar();
 	}
+
 
 }
