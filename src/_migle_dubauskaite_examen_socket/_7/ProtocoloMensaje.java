@@ -51,8 +51,8 @@ public class ProtocoloMensaje {
 			int inicio = Integer.parseInt(inicioStr);
 			int fin = Integer.parseInt(finStr);
 			if (inicio > fin)
-	            return ERR;
-			
+				return ERR;
+
 			for (int i = inicio; i <= fin; i++) {
 				sb.append(i);
 				if (i < fin)
@@ -71,7 +71,7 @@ public class ProtocoloMensaje {
 			int inicio = Integer.parseInt(inicioStr);
 			int fin = Integer.parseInt(finStr);
 			if (inicio > fin)
-	            return ERR;
+				return ERR;
 			int numero = 0;
 
 			for (int i = 0; i < 3; i++) {

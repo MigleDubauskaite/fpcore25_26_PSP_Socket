@@ -1,7 +1,6 @@
-package _migle_dubauskaite_examen_socket._7;
+package _migle_dubauskaite_examen_socket._9;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -11,8 +10,7 @@ public class ClientTCP {
 
 	private String host;
 	private int port;
-
-	private static int MAX_INTENTOS = 5;
+	private static long MAX_INTENTOS = 5;
 
 	public ClientTCP(String host, int port) {
 		this.host = host;
@@ -25,32 +23,37 @@ public class ClientTCP {
 				BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				Scanner sc = new Scanner(System.in)) {
 
+			System.out.printf("INTENTOS TOTALES %d%n", MAX_INTENTOS);
 			int intentos = 0;
 
 			while (intentos < MAX_INTENTOS) {
 				intentos++;
-				System.out.printf("Cliente [%d/%d] >>> ", intentos, MAX_INTENTOS);
+
+				System.out.printf("Cliente (%d/%d) > ", intentos, MAX_INTENTOS);
 				String mensaje = sc.nextLine();
 				pw.println(mensaje);
+				System.out.printf("Cliente -> Mensaje: %s%n", mensaje);
 
 				String respuesta = br.readLine();
 				System.out.printf("Cliente -> Respuesta: %s%n", respuesta);
 
-				if ("#Finalizado#".equals(respuesta))
+				if ("#Conexion cerrada#".equals(respuesta)) {
+					System.out.println("Conexión terminada");
 					break;
-
-				if ("#Error#".equals(respuesta)) {
-					System.out.println("Mensaje no adecuadamente formateado para su tratamiento.");
 				}
+
+				if ("#Formato incorrecto#".equals(respuesta))
+					System.out.println("El formato de mensaje es inválido....");
+
 			}
 
-		} catch (IOException e) {
-			System.out.printf("Cliente -> Error: %s%n", e.getMessage());
+		} catch (Exception e) {
+			System.out.printf("Cliente --> Error: %s%n", e.getMessage());
 		}
 	}
 
 	public static void main(String[] args) {
-		new ClientTCP("localhost", 8888).iniciarCliente();
+		new ClientTCP("localhost", 5555).iniciarCliente();
 	}
 
 }
